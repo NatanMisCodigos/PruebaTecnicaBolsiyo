@@ -9,20 +9,17 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.pruebatecnicabold.R;
-import com.example.pruebatecnicabold.interfaces.LocationInterfaces;
-import com.example.pruebatecnicabold.model.Location;
-import com.example.pruebatecnicabold.model.adapters.LocationAdapter;
-import com.example.pruebatecnicabold.presenter.LocationPresenter;
-import com.example.pruebatecnicabold.rest.Utils;
-
 import java.util.ArrayList;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.LocationInterfaces;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Location;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters.LocationAdapter;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter.LocationPresenter;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Utils;
 
 public class LocationActivityView extends Activity implements LocationInterfaces.View {
 

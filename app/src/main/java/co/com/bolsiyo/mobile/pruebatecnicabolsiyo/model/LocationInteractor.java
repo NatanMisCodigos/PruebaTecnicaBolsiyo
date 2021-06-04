@@ -2,12 +2,11 @@ package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model;
 
 import android.content.Context;
 
-import com.example.pruebatecnicabold.interfaces.LocationInterfaces;
-import com.example.pruebatecnicabold.rest.ApiAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.LocationInterfaces;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.ApiAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

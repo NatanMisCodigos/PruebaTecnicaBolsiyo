@@ -6,9 +6,9 @@ import android.content.Context;
 import android.os.Build;
 import android.view.WindowManager;
 
-import com.example.pruebatecnicabold.R;
-
 import java.util.Calendar;
+
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
 
 public class Utils {
 

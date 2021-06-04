@@ -1,11 +1,10 @@
 package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces;
 
-import com.example.pruebatecnicabold.model.Location;
-import com.example.pruebatecnicabold.model.Weather;
-import com.example.pruebatecnicabold.rest.Endpoints;
-
 import java.util.List;
 
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Location;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Weather;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Endpoints;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

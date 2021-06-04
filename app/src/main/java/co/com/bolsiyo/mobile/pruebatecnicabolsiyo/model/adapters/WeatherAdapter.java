@@ -11,12 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.pruebatecnicabold.R;
-import com.example.pruebatecnicabold.model.Weather;
-import com.example.pruebatecnicabold.rest.Endpoints;
-import com.example.pruebatecnicabold.rest.Utils;
 
 import java.util.List;
+
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Weather;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Endpoints;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Utils;
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder> {
 

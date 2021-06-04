@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_back"
-                        app:tint="@color/colorPrimary" />
+                        app:tint="@color/design_default_color_primary" />
 
                 </RelativeLayout>
 
@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Title"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="#EA2424"
                     />
 
                 <LinearLayout
@@ -82,7 +82,7 @@
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
                         android:src="@drawable/ic_location"
-                        app:tint="@color/colorPrimary" />
+                        app:tint="#D51E1E" />
 
                     <TextView
                         android:id="@+id/typeLocation"
@@ -105,7 +105,7 @@
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
                         android:src="@drawable/ic_temperature"
-                        app:tint="@color/colorPrimary" />
+                        app:tint="#EA2424" />
 
                     <TextView
                         android:id="@+id/temperature_today"

@@ -2,11 +2,11 @@ package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter;
 
 import android.content.Context;
 
-import com.example.pruebatecnicabold.interfaces.WeatherInterfaces;
-import com.example.pruebatecnicabold.model.Weather;
-import com.example.pruebatecnicabold.model.WeatherInteractor;
-
 import java.util.List;
+
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.WeatherInterfaces;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Weather;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.WeatherInteractor;
 
 public class WeatherPresenter implements WeatherInterfaces.Presenter {
 

@@ -2,13 +2,12 @@ package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model;
 
 import android.content.Context;
 
-import com.example.pruebatecnicabold.R;
-import com.example.pruebatecnicabold.interfaces.WeatherInterfaces;
-import com.example.pruebatecnicabold.rest.ApiAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.WeatherInterfaces;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.ApiAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

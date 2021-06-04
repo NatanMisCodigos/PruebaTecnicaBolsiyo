@@ -1,9 +1,9 @@
 package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest;
 
-import com.example.pruebatecnicabold.interfaces.JsonApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.JsonApi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

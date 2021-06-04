@@ -1,9 +1,9 @@
 package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces;
 
 
-import com.example.pruebatecnicabold.model.Location;
-
 import java.util.ArrayList;
+
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Location;
 
 public interface LocationInterfaces {
 

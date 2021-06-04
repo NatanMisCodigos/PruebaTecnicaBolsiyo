@@ -13,17 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
-import com.example.pruebatecnicabold.R;
-import com.example.pruebatecnicabold.interfaces.WeatherInterfaces;
-import com.example.pruebatecnicabold.model.Location;
-import com.example.pruebatecnicabold.model.Weather;
-import com.example.pruebatecnicabold.model.adapters.WeatherAdapter;
-import com.example.pruebatecnicabold.presenter.WeatherPresenter;
-import com.example.pruebatecnicabold.rest.Endpoints;
-import com.example.pruebatecnicabold.rest.Utils;
 
 import java.util.Calendar;
 import java.util.List;
+
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.WeatherInterfaces;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Location;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Weather;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters.WeatherAdapter;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter.WeatherPresenter;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Endpoints;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Utils;
 
 public class WeatherActivityView extends AppCompatActivity implements WeatherInterfaces.View {
 

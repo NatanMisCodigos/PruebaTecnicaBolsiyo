@@ -11,11 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pruebatecnicabold.R;
-import com.example.pruebatecnicabold.model.Location;
-import com.example.pruebatecnicabold.view.WeatherActivityView;
-
 import java.util.List;
+
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Location;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.view.WeatherActivityView;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.UserViewHolder> {
 

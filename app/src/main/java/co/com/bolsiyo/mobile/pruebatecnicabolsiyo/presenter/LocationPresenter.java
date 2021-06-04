@@ -2,11 +2,11 @@ package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter;
 
 import android.content.Context;
 
-import com.example.pruebatecnicabold.interfaces.LocationInterfaces;
-import com.example.pruebatecnicabold.model.Location;
-import com.example.pruebatecnicabold.model.LocationInteractor;
-
 import java.util.ArrayList;
+
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.LocationInterfaces;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Location;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.LocationInteractor;
 
 public class LocationPresenter implements LocationInterfaces.Presenter {
 

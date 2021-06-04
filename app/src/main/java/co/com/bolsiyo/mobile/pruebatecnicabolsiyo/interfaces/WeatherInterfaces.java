@@ -1,8 +1,9 @@
 package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces;
 
-import com.example.pruebatecnicabold.model.Weather;
 
 import java.util.List;
+
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Weather;
 
 public interface WeatherInterfaces {
 
