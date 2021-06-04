@@ -2,8 +2,10 @@ package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import java.util.Calendar;
@@ -20,8 +22,10 @@ public class Utils {
         dialog.show();
     }
 
-    public static void dismissDialog() {
-        //dialog.dismiss();
+    public static void tamañoDialogo(Dialog dialog) {
+        ViewGroup.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
     }
 
     public static void hideNotificationBar(Activity activity){

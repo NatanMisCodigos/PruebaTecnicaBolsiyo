@@ -1,7 +1,5 @@
 package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import com.squareup.picasso.Picasso;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.ImageInterfaces;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.ImageApi;
-import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.view.WeatherActivityView;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.UserViewHolder> {
 
@@ -28,7 +25,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.UserViewHold
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.location_list_item, parent, false);
+                inflate(R.layout.image_item, parent, false);
         return new UserViewHolder(view);
     }
 

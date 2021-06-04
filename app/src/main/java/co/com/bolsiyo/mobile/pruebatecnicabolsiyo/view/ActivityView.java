@@ -9,11 +9,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
+import com.squareup.picasso.Picasso;
 
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.ImageInterfaces;
@@ -22,7 +24,7 @@ import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters.ImageAdapter;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter.ImagePresenter;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Utils;
 
-public class LocationActivityView extends Activity implements ImageInterfaces.View {
+public class ActivityView extends Activity implements ImageInterfaces.View {
 
     private Context context = this;
     private EditText editTextSearch;
@@ -39,7 +41,7 @@ public class LocationActivityView extends Activity implements ImageInterfaces.Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
+        setContentView(R.layout.activity_view);
         initItems();
     }
 
@@ -86,8 +88,30 @@ public class LocationActivityView extends Activity implements ImageInterfaces.Vi
     @Override
     public void showDetailsImage(ImageApi.Hits image) {
         Dialog dialogImage = new Dialog(this);
+        dialogImage.setContentView(R.layout.image_details);
+        dialogImage.setCancelable(false);
 
+        ImageView cerrar = dialogImage.findViewById(R.id.cerrar);
+        cerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogImage.dismiss();
+            }
+        });
 
+        ImageView imagen = dialogImage.findViewById(R.id.image);
+        Picasso.get().load(image.getLargeImageURL()).into(imagen);
+
+        TextView tags = dialogImage.findViewById(R.id.tags_image);
+        tags.setText( image.getTags().replace(",", "\n") );
+
+        TextView views = dialogImage.findViewById(R.id.views_image);
+        views.setText( "" + image.getViews() );
+
+        TextView like = dialogImage.findViewById(R.id.like_image);
+        like.setText( "" + image.getLikes() );
+
+        Utils.tamañoDialogo(dialogImage);
 
         dialogImage.show();
     }
