@@ -5,16 +5,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,7 +25,7 @@ import com.squareup.picasso.Picasso;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.ImageInterfaces;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.ImageApi;
-import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters.ImageAdapter;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.ImageAdapter;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter.ImagePresenter;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Utils;
 
@@ -58,20 +58,29 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
         Utils.hideNotificationBar(this);
     }
 
+    /**********************************************
+     * Modifico el estado de algunos elmentos, para
+     * mostrar al usuario los resultados de la
+     * satisfactoria busqueda
+     * *******************************************/
     @Override
     public void showImageList(ImageApi imageList) {
         this.usersList = imageList;
-
         error404.setVisibility(View.GONE);
         imageEmpty.setVisibility(View.GONE);
         messageEmpty.setVisibility(View.GONE);
         recyclerViewSearchResults.setVisibility(View.VISIBLE);
-
         imageAdapter = new ImageAdapter(this.usersList, presenter);
         recyclerViewSearchResults.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerViewSearchResults.setAdapter(imageAdapter);
     }
 
+    /**********************************************
+     * En caso de no haber recibido una respuesta
+     * satisfactoria, oculto y muestro ciertos
+     * elementos de la activity, para notifcar
+     * al usuario lo que ocurrio
+     * *******************************************/
     @Override
     public void emptyList(String message) {
         messageEmpty.setText(message);
@@ -80,6 +89,12 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
         recyclerViewSearchResults.setVisibility(View.GONE);
     }
 
+    /**********************************************
+     * Aqui recibo los datos que necesito para
+     * mostrar los detalles de la imagen
+     * seleccionada por el usuario, para luego
+     * mostrarlos en un dialog
+     * *******************************************/
     @Override
     public void showDetailsImage(ImageApi.Hits image) {
         Dialog dialogImage = new Dialog(this);
@@ -116,37 +131,64 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
         finish();
     }
 
+    /**********************************************
+     * Metodo que se ejecuta con el onCreate() para
+     * enlazar elementos que se usaran a lo largo de
+     * la vida util de la aplicacion
+     * *******************************************/
     private void initItems() {
 
+        initEditTextSearch();
         constraintSplash = findViewById(R.id.constrain_splash);
         constraintLocation = findViewById(R.id.constrain_location);
         imageEmpty = findViewById(R.id.image_empty);
         error404 = findViewById(R.id.error);
         messageEmpty = findViewById(R.id.message_empty);
-        editTextSearch = findViewById(R.id.editTextSearch);
         recyclerViewSearchResults = findViewById(R.id.recyclerViewSearchResults);
-
         busqueda = findViewById(R.id.busqueda);
         busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editTextSearch.getText().toString().trim().isEmpty()){
-                    presenter.getImageListSpinner(spinnercategories.getSelectedItem().toString());
-                    return;
-                }
-
-                if(spinnercategories.getSelectedItemPosition() == 0){
-                    presenter.getImageListSearch(editTextSearch.getText().toString().trim());
-                    return;
-                }
-
-                presenter.getImageListSearchSpinner(editTextSearch.getText().toString().trim(),
-                        spinnercategories.getSelectedItem().toString());
-
+                searchWithImage();
             }
         });
 
+        initSpinner();
+        presenter.getImageListDefault();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showConstrainLocation();
+            }
+        }, 2500);
+    }
+
+    /**********************************************
+     * Con este metodo enlazo el editText de
+     * busqueda y le doy un comportamiento
+     * *******************************************/
+    private void initEditTextSearch(){
+
+        editTextSearch = findViewById(R.id.editTextSearch);
+        editTextSearch.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // si presiona enter
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    searchWithImage();
+                    hideSoftKeyboard();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    /**********************************************
+     * Enlazo el spinner de categorias y le doy
+     * un comportamiento
+     * *******************************************/
+    private void initSpinner(){
         spinnercategories = findViewById(R.id.spinner_categorias);
         spinnercategories.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item, Utils.categories));
@@ -163,24 +205,41 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
-
-        presenter.getImageListDefault();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showConstrainLocation();
-            }
-        }, 2500);
     }
 
+    /**********************************************
+     * Con este metodo, realizo ciertas acciones
+     * que necesito cuando el usuario presione
+     * la imagen de busqueda o la tecla enter
+     * *******************************************/
+    private void searchWithImage(){
+        if(editTextSearch.getText().toString().trim().isEmpty()){
+            presenter.getImageListSpinner(spinnercategories.getSelectedItem().toString());
+            return;
+        }
+        if(spinnercategories.getSelectedItemPosition() == 0){
+            presenter.getImageListSearch(editTextSearch.getText().toString().trim());
+            return;
+        }
+        presenter.getImageListSearchSpinner(editTextSearch.getText().toString().trim(),
+                spinnercategories.getSelectedItem().toString());
+    }
+
+    /**********************************************
+     * Metodo que se ejecuta despues de haber
+     * mostrado por unos segundos un splash
+     * screen
+     * *******************************************/
     void showConstrainLocation(){
         constraintSplash.setVisibility(View.GONE);
         constraintLocation.setVisibility(View.VISIBLE);
+    }
+
+    public void hideSoftKeyboard() {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
 }

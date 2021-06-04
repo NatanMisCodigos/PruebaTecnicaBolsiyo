@@ -1,4 +1,4 @@
-package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters;
+package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.ImageInterfaces;
-import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.ImageApi;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.UserViewHolder> {
 
