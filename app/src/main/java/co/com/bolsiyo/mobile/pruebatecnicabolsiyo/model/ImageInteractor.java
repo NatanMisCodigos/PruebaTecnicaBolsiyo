@@ -1,7 +1,6 @@
 package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model;
 
 import android.content.Context;
-
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.ImageInterfaces;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.ApiAdapter;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Utils;

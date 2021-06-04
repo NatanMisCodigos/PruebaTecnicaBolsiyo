@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,13 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.squareup.picasso.Picasso;
-
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.ImageInterfaces;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.ImageApi;
@@ -172,7 +169,6 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
         editTextSearch = findViewById(R.id.editTextSearch);
         editTextSearch.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // si presiona enter
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     searchWithImage();
