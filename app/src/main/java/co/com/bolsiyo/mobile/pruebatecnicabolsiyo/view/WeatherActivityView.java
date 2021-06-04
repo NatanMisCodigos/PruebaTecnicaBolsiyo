@@ -19,7 +19,7 @@ import java.util.List;
 
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.WeatherInterfaces;
-import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Location;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.ImageApi;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Weather;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters.WeatherAdapter;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter.WeatherPresenter;
@@ -43,8 +43,8 @@ public class WeatherActivityView extends AppCompatActivity implements WeatherInt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
-        Location location = (Location) getIntent().getSerializableExtra("location");
-        initItems(location);
+        ImageApi imageApi = (ImageApi) getIntent().getSerializableExtra("imageApi");
+        initItems(imageApi);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class WeatherActivityView extends AppCompatActivity implements WeatherInt
         //Utils.dismissDialog();
     }
 
-    private void initItems(Location location) {
+    private void initItems(ImageApi imageApi) {
         context = getApplicationContext();
 
         title = findViewById(R.id.name);
@@ -101,12 +101,9 @@ public class WeatherActivityView extends AppCompatActivity implements WeatherInt
         });
 
         WeatherInterfaces.Presenter presenter = new WeatherPresenter(this, context);
-        title.setText(location.getTitle());
-        locationType.setText(location.getLocation_type());
         Calendar fecha = Calendar.getInstance();
         int mes = fecha.get(Calendar.MONTH) + 1;
         int dia = fecha.get(Calendar.DAY_OF_MONTH);
-        presenter.getUserPosts(location.getWoeid(), "2021", "" + mes, "" + dia);
     }
 
 }

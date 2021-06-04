@@ -1,6 +1,7 @@
 package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.view;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,25 +11,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
-import java.util.ArrayList;
+
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
-import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.LocationInterfaces;
-import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.Location;
-import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters.LocationAdapter;
-import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter.LocationPresenter;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.ImageInterfaces;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.ImageApi;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.adapters.ImageAdapter;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.presenter.ImagePresenter;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Utils;
 
-public class LocationActivityView extends Activity implements LocationInterfaces.View {
+public class LocationActivityView extends Activity implements ImageInterfaces.View {
 
     private Context context = this;
     private EditText editTextSearch;
     private RecyclerView recyclerViewSearchResults;
-    private LocationInterfaces.Presenter presenter = new LocationPresenter(this, context);
-    private LocationAdapter locationAdapter;
-    private ArrayList<Location> usersList;
+    private ImageInterfaces.Presenter presenter = new ImagePresenter(this, context);
+    private ImageAdapter imageAdapter;
+    private ImageApi usersList;
     private ConstraintLayout constraintSplash;
     private ConstraintLayout constraintLocation;
     private LottieAnimationView imageEmpty;
@@ -49,20 +50,17 @@ public class LocationActivityView extends Activity implements LocationInterfaces
     }
 
     @Override
-    public void showUsers(ArrayList<Location> usersList) {
-        this.usersList = usersList;
+    public void showImageList(ImageApi imageList) {
+        this.usersList = imageList;
 
         error404.setVisibility(View.GONE);
         imageEmpty.setVisibility(View.GONE);
         messageEmpty.setVisibility(View.GONE);
         recyclerViewSearchResults.setVisibility(View.VISIBLE);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        locationAdapter = new LocationAdapter(this.usersList, context);
-        recyclerViewSearchResults.setLayoutManager(linearLayoutManager);
-        recyclerViewSearchResults.setAdapter(locationAdapter);
-        Utils.dismissDialog();
+        imageAdapter = new ImageAdapter(this.usersList, presenter);
+        recyclerViewSearchResults.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerViewSearchResults.setAdapter(imageAdapter);
     }
 
     @Override
@@ -83,6 +81,15 @@ public class LocationActivityView extends Activity implements LocationInterfaces
         imageEmpty.setVisibility(View.VISIBLE);
         messageEmpty.setVisibility(View.VISIBLE);
         recyclerViewSearchResults.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showDetailsImage(ImageApi.Hits image) {
+        Dialog dialogImage = new Dialog(this);
+
+
+
+        dialogImage.show();
     }
 
     @Override
@@ -109,7 +116,6 @@ public class LocationActivityView extends Activity implements LocationInterfaces
 
             @Override
             public void afterTextChanged(Editable s) {
-                presenter.getUsersFromApi(editTextSearch.getText().toString().trim());
                 //openDialog();
             }
         });
@@ -120,6 +126,7 @@ public class LocationActivityView extends Activity implements LocationInterfaces
             @Override
             public void run() {
                 showConstrainLocation();
+                presenter.getUsersFromApi();
             }
         }, 4000);
     }
