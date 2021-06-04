@@ -11,5 +11,18 @@ import retrofit2.http.Query;
 public interface JsonApi {
 
     @GET(".")
-    Call<ImageApi> getUsers(@Query("key") String key);
+    Call<ImageApi> getImageListDefault(@Query("key") String key, @Query("lang") String lang);
+
+    @GET(".")
+    Call<ImageApi> getImageListSearch(@Query("key") String key, @Query("lang") String lang,
+                                      @Query("q") String q);
+
+    @GET(".")
+    Call<ImageApi> getImageListSpinner(@Query("key") String key, @Query("lang") String lang,
+                                      @Query("category") String category);
+
+    @GET(".")
+    Call<ImageApi> getImageListSearchSpinner(@Query("key") String key, @Query("lang") String lang,
+                                       @Query("q") String q, @Query("category") String category);
+
 }

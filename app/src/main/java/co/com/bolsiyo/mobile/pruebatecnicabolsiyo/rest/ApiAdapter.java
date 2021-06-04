@@ -11,7 +11,7 @@ public class ApiAdapter {
 
     private static JsonApi jsonApi;
 
-    public static JsonApi getDataUser() {
+    public static JsonApi getDataList() {
 
         Gson gson = new GsonBuilder()
                 .setLenient()

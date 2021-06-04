@@ -15,6 +15,10 @@ import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.R;
 public class Utils {
 
     private static AlertDialog dialog;
+    public static String keyApi = "13119377-fc7e10c6305a7de49da6ecb25";
+    public static String langEs = "es";
+    public static String[] categories = {"Seleccionar categoria","science","education","people",
+            "feelings","computer","buildings"};
 
     public static void showDialog(Context context) {
         dialog = new AlertDialog.Builder(context).create();
@@ -22,7 +26,7 @@ public class Utils {
         dialog.show();
     }
 
-    public static void tamañoDialogo(Dialog dialog) {
+    public static void dialogSize(Dialog dialog) {
         ViewGroup.LayoutParams params = dialog.getWindow().getAttributes();
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
         dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);

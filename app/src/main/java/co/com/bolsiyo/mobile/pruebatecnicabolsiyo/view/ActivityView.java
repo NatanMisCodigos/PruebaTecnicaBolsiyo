@@ -8,9 +8,14 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,11 +37,13 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
     private ImageInterfaces.Presenter presenter = new ImagePresenter(this, context);
     private ImageAdapter imageAdapter;
     private ImageApi usersList;
+    private ImageView busqueda;
     private ConstraintLayout constraintSplash;
     private ConstraintLayout constraintLocation;
     private LottieAnimationView imageEmpty;
     private LottieAnimationView error404;
     private TextView messageEmpty;
+    private Spinner spinnercategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +86,6 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
     public void emptyList(String message) {
         messageEmpty.setText(message);
 
-        error404.setVisibility(View.GONE);
         imageEmpty.setVisibility(View.VISIBLE);
         messageEmpty.setVisibility(View.VISIBLE);
         recyclerViewSearchResults.setVisibility(View.GONE);
@@ -111,7 +117,7 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
         TextView like = dialogImage.findViewById(R.id.like_image);
         like.setText( "" + image.getLikes() );
 
-        Utils.tamañoDialogo(dialogImage);
+        Utils.dialogSize(dialogImage);
 
         dialogImage.show();
     }
@@ -125,43 +131,65 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
 
         constraintSplash = findViewById(R.id.constrain_splash);
         constraintLocation = findViewById(R.id.constrain_location);
-
         imageEmpty = findViewById(R.id.image_empty);
         error404 = findViewById(R.id.error);
         messageEmpty = findViewById(R.id.message_empty);
-
         editTextSearch = findViewById(R.id.editTextSearch);
-        editTextSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        recyclerViewSearchResults = findViewById(R.id.recyclerViewSearchResults);
 
+        busqueda = findViewById(R.id.busqueda);
+        busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onClick(View v) {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                //openDialog();
+                if(editTextSearch.getText().toString().trim().isEmpty())
+                    return;
+
+                if(spinnercategories.getSelectedItemPosition() == 0){
+                    presenter.getImageListSearch(editTextSearch.getText().toString().trim());
+                    return;
+                }
+
+                presenter.getImageListSearchSpinner(editTextSearch.getText().toString().trim(),
+                        spinnercategories.getSelectedItem().toString());
+
             }
         });
 
-        recyclerViewSearchResults = findViewById(R.id.recyclerViewSearchResults);
+        spinnercategories = findViewById(R.id.spinner_categorias);
+        spinnercategories.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item, Utils.categories));
+        spinnercategories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(editTextSearch.getText().toString().trim().isEmpty()){
+                    presenter.getImageListSpinner(spinnercategories.getSelectedItem().toString());
+                    return;
+                }
+
+                presenter.getImageListSearchSpinner(editTextSearch.getText().toString().trim(),
+                        spinnercategories.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        presenter.getImageListDefault();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 showConstrainLocation();
-                presenter.getUsersFromApi();
             }
-        }, 4000);
+        }, 2500);
     }
 
     void showConstrainLocation(){
         constraintSplash.setVisibility(View.GONE);
         constraintLocation.setVisibility(View.VISIBLE);
-    }
-
-    public void openDialog() {
-        Utils.showDialog(context);
     }
 
 }

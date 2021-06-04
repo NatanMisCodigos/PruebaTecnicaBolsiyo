@@ -4,6 +4,7 @@ import android.content.Context;
 
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces.ImageInterfaces;
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.ApiAdapter;
+import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.rest.Utils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,9 +21,30 @@ public class ImageInteractor implements ImageInterfaces.Interactor, Callback<Ima
     }
 
     @Override
-    public void getUsersFromApi() {
-        Call<ImageApi> call = ApiAdapter.getDataUser().getUsers("13119377-fc7e10c6305a7de49da6ecb25");
+    public void getImageListDefault() {
+        Call<ImageApi> call = ApiAdapter.getDataList().getImageListDefault(Utils.keyApi, Utils.langEs);
         System.out.println("REQUEST: " + call.request().toString());
+        call.enqueue(this);
+    }
+
+    @Override
+    public void getImageListSearch(String query) {
+        Call<ImageApi> call = ApiAdapter.getDataList().getImageListSearch(Utils.keyApi,
+                Utils.langEs, query );
+        call.enqueue(this);
+    }
+
+    @Override
+    public void getImageListSearchSpinner(String query, String category) {
+        Call<ImageApi> call = ApiAdapter.getDataList().getImageListSearchSpinner(Utils.keyApi,
+                Utils.langEs, query, category );
+        call.enqueue(this);
+    }
+
+    @Override
+    public void getImageListSpinner(String category) {
+        Call<ImageApi> call = ApiAdapter.getDataList().getImageListSpinner(Utils.keyApi,
+                Utils.langEs, category );
         call.enqueue(this);
     }
 
@@ -30,7 +52,7 @@ public class ImageInteractor implements ImageInterfaces.Interactor, Callback<Ima
     public void onResponse(Call<ImageApi> call, Response<ImageApi> response) {
         System.out.println("MENSAJE: " + response.toString());
         if (!response.isSuccessful()) {
-            presenter.emptyList("Busca una Ciudad");
+            presenter.emptyList("Sin resultados");
         } else {
             imageApiList = response.body();
 
@@ -42,7 +64,7 @@ public class ImageInteractor implements ImageInterfaces.Interactor, Callback<Ima
             if (imageApiList != null) {
                 presenter.showImageList((ImageApi) imageApiList);
             } else {
-                presenter.showMessage("Sin datos");
+                presenter.emptyList("Sin datos");
             }
         }
     }

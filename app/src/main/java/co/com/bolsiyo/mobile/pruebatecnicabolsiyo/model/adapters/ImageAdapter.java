@@ -48,7 +48,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.UserViewHold
         }
 
         void bindData(final ImageApi.Hits hits) {
-            Picasso.get().load(hits.getUserImageURL()).into(imagen);
+            if(!hits.getUserImageURL().isEmpty())
+                Picasso.get().load(hits.getUserImageURL()).into(imagen);
             imagen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

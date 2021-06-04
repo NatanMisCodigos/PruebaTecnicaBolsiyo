@@ -41,8 +41,26 @@ public class ImagePresenter implements ImageInterfaces.Presenter {
     }
 
     @Override
-    public void getUsersFromApi() {
+    public void getImageListDefault() {
         if(interactor != null)
-            interactor.getUsersFromApi();
+            interactor.getImageListDefault();
+    }
+
+    @Override
+    public void getImageListSearch(String query) {
+        if(interactor != null)
+            interactor.getImageListSearch(query);
+    }
+
+    @Override
+    public void getImageListSearchSpinner(String query, String category) {
+        if(interactor != null)
+            interactor.getImageListSearchSpinner(query, category);
+    }
+
+    @Override
+    public void getImageListSpinner(String category) {
+        if(interactor != null)
+            interactor.getImageListSpinner(category);
     }
 }

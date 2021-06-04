@@ -1,8 +1,5 @@
 package co.com.bolsiyo.mobile.pruebatecnicabolsiyo.interfaces;
 
-
-import java.util.ArrayList;
-
 import co.com.bolsiyo.mobile.pruebatecnicabolsiyo.model.ImageApi;
 
 public interface ImageInterfaces {
@@ -15,7 +12,10 @@ public interface ImageInterfaces {
     }
 
     interface Interactor{
-        void getUsersFromApi();
+        void getImageListDefault();
+        void getImageListSearch(String query);
+        void getImageListSearchSpinner(String query, String category);
+        void getImageListSpinner(String category);
     }
 
     interface Presenter{
@@ -23,7 +23,10 @@ public interface ImageInterfaces {
         void showImageList(ImageApi imageList);
         void showMessage(String message);
         void showDetailsImage(ImageApi.Hits image);
-        void getUsersFromApi();
+        void getImageListDefault();
+        void getImageListSearch(String query);
+        void getImageListSearchSpinner(String query, String category);
+        void getImageListSpinner(String category);
     }
 
 }
