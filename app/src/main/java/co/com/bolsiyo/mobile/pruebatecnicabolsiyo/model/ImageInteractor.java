@@ -52,25 +52,25 @@ public class ImageInteractor implements ImageInterfaces.Interactor, Callback<Ima
     public void onResponse(Call<ImageApi> call, Response<ImageApi> response) {
         System.out.println("MENSAJE: " + response.toString());
         if (!response.isSuccessful()) {
-            presenter.emptyList("Sin resultados");
+            presenter.emptyList("Error con el servidor:\nVerifique conexion a internet");
         } else {
             imageApiList = response.body();
 
             if(imageApiList.getHits().size() == 0){
-                presenter.emptyList("Nada aqui");
+                presenter.emptyList("Sin resultados");
                 return;
             }
 
             if (imageApiList != null) {
                 presenter.showImageList((ImageApi) imageApiList);
             } else {
-                presenter.emptyList("Sin datos");
+                presenter.emptyList("Sin resultados");
             }
         }
     }
 
     @Override
     public void onFailure(Call<ImageApi> call, Throwable t) {
-        presenter.showMessage("Error: " + t.getMessage());
+        presenter.emptyList("Error con el servidor:\nVerifique conexion a internet");
     }
 }

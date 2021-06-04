@@ -6,7 +6,6 @@ public interface ImageInterfaces {
 
     interface View{
         void showImageList(ImageApi imageList);
-        void showMessage(String message);
         void emptyList(String message);
         void showDetailsImage(ImageApi.Hits image);
     }
@@ -21,7 +20,6 @@ public interface ImageInterfaces {
     interface Presenter{
         void emptyList(String message);
         void showImageList(ImageApi imageList);
-        void showMessage(String message);
         void showDetailsImage(ImageApi.Hits image);
         void getImageListDefault();
         void getImageListSearch(String query);

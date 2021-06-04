@@ -20,12 +20,6 @@ public class Utils {
     public static String[] categories = {"Seleccionar categoria","science","education","people",
             "feelings","computer","buildings"};
 
-    public static void showDialog(Context context) {
-        dialog = new AlertDialog.Builder(context).create();
-        dialog.setMessage(context.getString(R.string.message_loading));
-        dialog.show();
-    }
-
     public static void dialogSize(Dialog dialog) {
         ViewGroup.LayoutParams params = dialog.getWindow().getAttributes();
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;

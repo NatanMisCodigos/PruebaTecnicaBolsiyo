@@ -29,12 +29,6 @@ public class ImagePresenter implements ImageInterfaces.Presenter {
     }
 
     @Override
-    public void showMessage(String message) {
-        if(view != null)
-            view.showMessage(message);
-    }
-
-    @Override
     public void showDetailsImage(ImageApi.Hits image) {
         if(view != null)
             view.showDetailsImage(image);

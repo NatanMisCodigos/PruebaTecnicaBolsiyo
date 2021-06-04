@@ -73,19 +73,8 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
     }
 
     @Override
-    public void showMessage(String message) {
-        System.out.println("" + message);
-        error404.setVisibility(View.VISIBLE);
-
-        imageEmpty.setVisibility(View.GONE);
-        messageEmpty.setVisibility(View.GONE);
-        recyclerViewSearchResults.setVisibility(View.GONE);
-    }
-
-    @Override
     public void emptyList(String message) {
         messageEmpty.setText(message);
-
         imageEmpty.setVisibility(View.VISIBLE);
         messageEmpty.setVisibility(View.VISIBLE);
         recyclerViewSearchResults.setVisibility(View.GONE);
@@ -142,8 +131,10 @@ public class ActivityView extends Activity implements ImageInterfaces.View {
             @Override
             public void onClick(View v) {
 
-                if(editTextSearch.getText().toString().trim().isEmpty())
+                if(editTextSearch.getText().toString().trim().isEmpty()){
+                    presenter.getImageListSpinner(spinnercategories.getSelectedItem().toString());
                     return;
+                }
 
                 if(spinnercategories.getSelectedItemPosition() == 0){
                     presenter.getImageListSearch(editTextSearch.getText().toString().trim());

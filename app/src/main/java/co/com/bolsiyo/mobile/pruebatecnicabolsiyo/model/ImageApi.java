@@ -19,9 +19,18 @@ public class ImageApi implements Serializable {
 
         private String userImageURL;
         private String tags;
+        private String previewURL;
         private String largeImageURL;
         private long views;
         private long likes;
+
+        public String getPreviewURL() {
+            return previewURL;
+        }
+
+        public void setPreviewURL(String previewURL) {
+            this.previewURL = previewURL;
+        }
 
         public long getLikes() {
             return likes;
